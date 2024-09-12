@@ -10,6 +10,7 @@ import login from './components/login.vue';
 import Navbar from './components/Navbar.vue';
 import EntregaEquipo from './components/EntregaEquipo.vue'
 import TablaGestor from './components/TablaGestor.vue';
+import Tabla_copia_correos from './components/Tabla_copia_correos.vue';
 
 
 import 'bootstrap';
@@ -28,6 +29,8 @@ const app = createApp({
 });
 
 app.use(store);
+// Componente para agregar copias de correo
+app.component('copia-correos', Tabla_copia_correos);
 app.component('form-operacion', FormularioOperacion);
 // Modales para gestores y campañas
 app.component('modal-gestor', ModalGestor);

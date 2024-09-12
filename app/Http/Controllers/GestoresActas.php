@@ -94,7 +94,7 @@ class GestoresActas extends Controller
     }
 
     // Saber que usuario inicio sesion
-    public function getSessionGestor(Request $request){
+    public static function getSessionGestor(Request $request){
         $usuario = $request->session()->get('gestor_session');
         return response()->json($usuario);
     }
@@ -105,6 +105,18 @@ class GestoresActas extends Controller
         $gestor->password = '';
         $gestor->save();
         return true;
+    }
+
+    // Mostrar usuarios que tienen permitido la copia a correo
+    public static function GestorSendMail(){
+        return response()->json(GestoreActas::where('copia_correo',true)->get());
+    }
+    // Quitar usuarios que tenian permitida la copia.
+    public static function DeleteGestorSendMail($id){
+        $gestor = GestoreActas::find($id);
+        $gestor->copia_correo = false;
+        $gestor->save();
+        return response()->json(true);
     }
 
 }

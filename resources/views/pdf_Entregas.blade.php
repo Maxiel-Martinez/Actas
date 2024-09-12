@@ -66,7 +66,7 @@
     </p>
 
     <p>
-        Entre los suscritos a saber, <strong>Andres Fernando Camacho Contreras</strong>, mayor de edad y vecino de la ciudad de Bogotá D.C., e identificado con la cédula de ciudadanía No. 1013620994, quien obra en nombre y representación de <strong>AMÉRICAS BPS S.A.</strong>, en su calidad de <strong>Director Operaciones IT</strong>, quien en adelante se denominará <strong>EL EMPLEADOR</strong>, y por la otra, <strong>{{$nombres}}</strong> identificado(a) con la cédula de ciudadanía número <strong>{{$cedula}}</strong> expedida en <strong>{{$expedicionCedula}}</strong> en calidad de <strong>EL TRABAJADOR</strong>, manifiestan que han efectuado EL PRESENTE COMÚN ACUERDO, acorde a las especificaciones anexas:
+        Entre los suscritos a saber, <strong>Andres Fernando Camacho Contreras</strong>, mayor de edad y vecino de la ciudad de Bogotá D.C., e identificado con la cédula de ciudadanía No. 1013620994, quien obra en nombre y representación de <strong>AMÉRICAS BPS S.A.</strong>, en su calidad de <strong>Director Operaciones IT</strong>, quien en adelante se denominará <strong>EL EMPLEADOR</strong>, y por la otra, <strong>{{strtoupper($nombres)}}</strong> identificado(a) con la cédula de ciudadanía número <strong>{{$cedula}}</strong> expedida en <strong>{{$expedicionCedula}}</strong> en calidad de <strong>EL TRABAJADOR</strong>, manifiestan que han efectuado EL PRESENTE COMÚN ACUERDO, acorde a las especificaciones anexas:
     </p>
 
     <p>
@@ -119,10 +119,7 @@
     </table>
     <table>
         <tr>
-            <th>Celular</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th colspan="4">Celular</th>
         </tr>
         <tr>
             <td>IMEI 1</td>

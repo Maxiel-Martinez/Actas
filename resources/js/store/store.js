@@ -186,7 +186,46 @@ const store = new Vuex.Store({
             }catch(Exception){
                 console.log("");
             }
-            }
+            },
+        // Envio de correos para las actas
+        sendEmails(state, data){
+            axios.post('/Actas/Emails', data)
+            .then(respuesta=>{
+                if(respuesta.data){
+                    Swal.fire({
+                        title: '¡Satisfactorio!',
+                        text: '¡Se ha enviado el acta a los correos relacionados!',
+                        icon: 'success',
+                        toast:true,
+                        timer:3000,
+                        showConfirmButton:false,
+                        position:'top-end'
+                    });
+                }else{
+                    alert('Ha ocurrido un error al enviar el correo!');
+                }
+            })
+            .catch(err=>{
+                console.log(err);
+            });
+        },
+        // Generar la descarga con los archivos que estan en el servidor
+        downloadPdfAgain(state, id) {
+            axios.post(`/Actas_de_responsabilidad/Historial/DownloadPDF/${id}`, {}, { responseType: 'blob' })
+                .then(res => {
+                    // Descargar el pdf desde laravel
+                    var link = document.getElementById('tryPdf');
+                    link.download = (new Date().getDate().toLocaleString() + '_' + (new Date().getMonth() + 1).toString() + '_' + (new Date().getFullYear()).toString() + '_' + new Date().getTime().toString()) + 'RECUPERADO' + '.pdf';
+                    link.href = URL.createObjectURL(res.data);
+                    link.click();
+                    URL.revokeObjectURL(link.href);
+                })
+                .catch(err => {
+                    console.log(err)
+                });
+
+        },
+        
     }
 });
 

@@ -25,13 +25,18 @@ class Pdf extends Controller
                 $tipo_acta = 'acta_operacion';
                 break;
             case 2:
-                $tipo_acta = 'acta_gestores';
+                $tipo_acta = 'acta_entrega';
                 break;
             case 3:
                 $tipo_acta = 'acta_retornos';
                 break;
             
         }
+        // Validar si existe el pdf
+        if(Historial_pdf::where('numero_caso',$n_caso)->exists()){
+            return Historial_pdf::where('numero_caso',$n_caso)->get();
+        }
+
         $horas = Carbon::now()->format('s.u');
         $salidaPDF = $dataPDF->output();
         $rutaPdf = public_path('pdf/');
@@ -177,7 +182,6 @@ class Pdf extends Controller
 
             $pdf->loadHtml($vista);
             $pdf->render();
-            
             // Guardar el pdf en el servidor y base de datos.
             $this->SavePDFServerDB($op_solicitante,$pdf,$fecha_entrega,$request,1,$n_caso,$op_solicitante);
 
@@ -359,7 +363,7 @@ class Pdf extends Controller
             $pdf->render();
 
             // Guardar el pdf en el servidor y base de datos.
-            $this->SavePDFServerDB($nombres.'_A_'.$nombreRecibe,$pdf,Carbon::now()->toDateString(),$request,3,$numeroCaso,$campana);
+            $this->SavePDFServerDB($nombres.'_A_'.$nombreRecibe,$pdf,Carbon::now()->toDateString(),$request,2,$numeroCaso,$campana);
 
         }catch(Exception $e){
             error_log($e->getMessage());

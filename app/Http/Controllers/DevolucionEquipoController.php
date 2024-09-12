@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DevolucionEquipo;
 use Illuminate\Http\Request;
 use PDF;
+use Illuminate\Support\Facades\Mail;
 
 class DevolucionEquipoController extends Controller
 {
@@ -27,6 +28,13 @@ class DevolucionEquipoController extends Controller
         $devolucion = DevolucionEquipo::create($validatedData);
 
         return response()->json($devolucion, 201);
+    
+        Post::create($request->all());
+
+        Mail::to('prueba@prueba.com')->send(new CorreoElectronico);
+
+        return redirect()->route('web.php');
+    
     }
 
 }

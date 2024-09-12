@@ -24,10 +24,11 @@
                     <td :class="tabla">{{ acta.numero_caso }}</td>
                     <td :class="tabla">{{ acta.tipo_acta }}</td>
                     <td :class="tabla">{{ acta.fecha_creacion }}</td>
-                    <td :class="tabla"><i class="fa-regular fa-file"></i> {{ acta.ruta_pdf }}</td>
+                    <td :class="tabla"><button :class="botones" @click="downloadPdfAgain(acta.id)"><i class="fa-regular fa-file"></i>   Descargar acta</button></td>
                 </tr>
             </tbody>
         </table>
+        <a href="" id="tryPdf"></a>
     </div>
 </template>
 
@@ -52,7 +53,7 @@ export default {
         }
     },
     methods: {
-        ...mapMutations(['getIDGestor']),
+        ...mapMutations(['getIDGestor', 'cerrarSesionAuto','downloadPdfAgain']),
         // Metodo para buscar por dias las actas realizadas por el gestor 
         buscarCasosAvanzado() {
             axios.post(`/Actas_de_responsabilidad/Historial/BuscarCasoAvanzado/${this.fecha}/${this.fecha}/${this.name_gestor_session}`)
@@ -90,6 +91,7 @@ export default {
     mounted() {
         this.getIDGestor();
         this.showActasGestorLogin();
+        this.cerrarSesionAuto([null]);
     },
 
 

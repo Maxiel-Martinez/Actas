@@ -2,7 +2,7 @@
   <div class="bg-custom min-h-screen flex items-center justify-center">
     <div class="bg-white bg-opacity-10 p-8 rounded-xl backdrop-blur-md w-96">
       <div class="flex justify-between items-center mb-8">
-        <img src="../assets/americas.png" alt="Américas BPS Logo" class="logo">
+        <img src="../assets/Logo_Blanco.png" alt="Américas BPS Logo" class="logo">
       </div>
       <form @submit.prevent="login">
         <div class="mb-4 relative">

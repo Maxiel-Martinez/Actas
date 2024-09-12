@@ -327,7 +327,7 @@ export default {
         ...mapState(['componentes_vuex', 'lista_operaciones', 'lista_gestores','inputs','botones','color_label','tabla','datos_form']),
     },
     methods: {
-        ...mapMutations(['mostrarComponentes', 'mostrarCampsAll', 'mostrarGestoresAll', 'cerrarSesionAuto',]),
+        ...mapMutations(['mostrarComponentes', 'mostrarCampsAll', 'mostrarGestoresAll', 'cerrarSesionAuto','downloadPdfAgain']),
         llenarCampos: async function () {
             await axios.post('/Actas_de_responsabilidad/Gestores/BuscarGestor', { id: this.g_seleccionado })
                 .then((gestor) => {
@@ -522,23 +522,6 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
-        },
-
-        // Generar la descarga con los archivos que estan en el servidor
-        downloadPdfAgain(id) {
-            axios.post(`/Actas_de_responsabilidad/Historial/DownloadPDF/${id}`, {}, { responseType: 'blob' })
-                .then(res => {
-                    // Descargar el pdf desde laravel
-                    var link = document.getElementById('tryPdf');
-                    link.download = (new Date().getDate().toLocaleString() + '_' + (new Date().getMonth() + 1).toString() + '_' + (new Date().getFullYear()).toString() + '_' + new Date().getTime().toString()) + 'RECUPERADO' + '.pdf';
-                    link.href = URL.createObjectURL(res.data);
-                    link.click();
-                    URL.revokeObjectURL(link.href);
-                })
-                .catch(err => {
-                    console.log(err)
-                });
-
         },
         // Buscar actas en la barra de busqueda
         buscarCasos: async function () {

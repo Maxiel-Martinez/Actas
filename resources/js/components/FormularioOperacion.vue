@@ -230,7 +230,8 @@
         <!-- Llamar a la funcion para generar el pdf -->
         <button :class="botones" @click="generarPDF"><span :class="[cargar]"></span> Generar
           PDF</button>
-        <button :class="botones"  @click="limpiarTodo"><span class="fa-solid fa-eraser" />
+          <button @click="sendInventory" :class="botones"><i class="fa-sharp fa-solid fa-envelope fa-bounce"></i>  Envio acta por correo</button>
+        <button :class="botones" @click="limpiarTodo"><span class="fa-solid fa-eraser" />
           Limpiar formulario</button>
       </div>
       <a href="#" download="" id="link"></a>
@@ -307,7 +308,22 @@ export default {
 
   },
   methods: {
-    ...mapMutations(['mostrarComponentes', 'mostrarGestores', 'getSession', 'mostrarCamps', 'cerrarSesionAuto', 'validateActas', 'getNameGestor','saveForm','loadForm']),
+    ...mapMutations(['mostrarComponentes', 'mostrarGestores', 'getSession', 'mostrarCamps', 'cerrarSesionAuto', 'validateActas', 'getNameGestor','saveForm','loadForm','sendEmails']),
+    // Envio correo de inventario
+    sendInventory(){
+      if (this.validarInformacion()) {
+        this.notificacion(4);
+      } else {
+        const firma1 = this.$refs.signaturePad.getSignatureDataUrl();
+        const firma2 = this.$refs.signaturePad2.getSignatureDataUrl();
+        const firma3 = this.$refs.signaturePad3.getSignatureDataUrl();
+        // Recoger las firmas para laravel
+        this.form_data.firma1 = firma1;
+        this.form_data.firma2 = firma2;
+        this.form_data.firma3 = firma3;
+        this.sendEmails(this.form_data);
+      }
+    },
     // Guardar formulario de la operacion
     guardarOperacion(){
       let cedula = this.usuario_session[0].cedula;

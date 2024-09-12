@@ -41,6 +41,11 @@
           <modal-componente/>
         </div>
       </div>
+      <section class="grid grid-cols-1 text-center p-3 mb-4 border-2">
+        <h3 class="text-2xl bg-purple-950 text-white text-center p-2">Copia de correos a usuarios</h3>
+        {{-- Copia correos a usuarios --}}
+        <copia-correos/>
+      </section>
       <div class="p-3 border-2">
         <h2 class="text-2xl border-2 bg-purple-950 text-white p-2">Datos de busqueda</h2>
         {{-- Tabla de busqueda con vue --}}

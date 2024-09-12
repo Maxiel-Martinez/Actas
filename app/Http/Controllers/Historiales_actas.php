@@ -52,8 +52,11 @@ class Historiales_actas extends Controller
 
 
     // Actas generadas por el usuario
-    public function historialMyActas(){
-        return view('my_documents');
+    public function historialMyActas(Request $request){
+        if($request->session()->has('gestor_session')){
+            return view('my_documents');
+        }
+        return redirect()->route('inicio_sesion');
     }
 
     // Buscar las actas sobre el gestor que inicio sesion

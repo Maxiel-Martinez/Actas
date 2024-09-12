@@ -261,22 +261,23 @@
       <button type="submit" :class="[botones]" @click="submitForm" :disabled="!condiciones" :enabled="condiciones">
         <i :class="[cargar]"></i> Generar PDF
       </button>
+      <button type="Email" :class="[botones]" @click="EnviarCorreo">
+        <i class="fa-solid fa-envelope me-2"></i>Enviar Por Correo
+      </button>
       <button type="reset" :class="[botones]" @click="limpiarTodo">
         <i class="fas fa-eraser me-2"></i>Limpiar
       </button>
+      
     </div>
     <a href="#" download="" id="down"></a>
   </div>
 </template>
-
-
 
 <script>
 import { mapState, mapMutations } from 'vuex';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import Firma from './Firma.vue';
-
 
 export default {
   components: {
@@ -341,6 +342,15 @@ export default {
     };
   },
   methods: {
+    EnviarCorreo() {
+      axios.post('/enviar-correo')
+        .then(response => {
+          console.log(response.data.message); // Mensaje de éxito
+        })
+        .catch(error => {
+          console.error('Error al enviar el correo', error); // Error si falla
+        });
+    },
     ...mapMutations(["getSession", 'mostrarCamps','cerrarSesionAuto','saveForm','loadForm']),
     // Cargar formulario si hay algo
     cargarRetorno(){

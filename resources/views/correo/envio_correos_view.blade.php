@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Detalles del Acta</title>
+    <style>
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-image: linear-gradient(to top, #54009e, #64009c, #72009b, #7e0099, #890197);
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+
+        .content {
+            padding: 30px 20px;
+            color: #333333;
+        }
+
+        .content h2 {
+            font-size: 14px;
+            color: #333333;
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f3e5f5;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            color: #DC73D8;
+            font-weight: bold;
+        }
+
+        .footer {
+            background-image: linear-gradient(to top, #54009e, #64009c, #72009b, #7e0099, #890197);
+            text-align: center;
+            padding: 15px;
+            color: #ffffff;;
+            font-size: 12px;
+        }
+
+        .footer a {
+            color: #a26ffc;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                width: 90%;
+            }
+
+            .content h2 {
+                font-size: 18px;
+            }
+
+            .header {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="{{asset('images/Logo_Blanco.png')}}" alt="" width="50%" style="margin: 20px"><br>
+            Detalles del Acta
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2>Nombre a quien se hizo el acta: <span class="highlight">{{$nombre}}</span></h2>
+            <h2>Numero de caso: <span class="highlight">{{$n_caso}}</span></h2>
+            <h2>Cargo: <span class="highlight">{{$cargo_operacion}}</span></h2>
+            <h2>Tipo de acta: <span class="highlight">{{$tipo_acta}}</span></h2>
+            <h2>Nombre del gestor: <span class="highlight">{{$nombre_gestor}}</span></h2>
+            <h2>Operación solicitante: <span class="highlight">{{$op_solicitante}}</span></h2>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Este es un correo generado automáticamente. Si tienes preguntas, visita nuestro <a href="#">sitio web</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
