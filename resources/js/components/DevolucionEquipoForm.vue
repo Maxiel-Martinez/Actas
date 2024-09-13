@@ -2,12 +2,14 @@
   <div class="card shadow-lg">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-6 mb-3">        
+        <div class="col-md-6 mb-3">
           <section>
             <article>
               <!-- Validar que se guarde el formulario del usuario logueado -->
-              <button :class="botones" @click="guardarRetorno"><i class="fa-solid fa-floppy-disk"></i> Guardar formulario</button>
-              <button :class="botones" @click="cargarRetorno"><i class="fa-solid fa-rotate-right"></i> Cargar formulario</button>
+              <button :class="botones" @click="guardarRetorno"><i class="fa-solid fa-floppy-disk"></i> Guardar
+                formulario</button>
+              <button :class="botones" @click="cargarRetorno"><i class="fa-solid fa-rotate-right"></i> Cargar
+                formulario</button>
             </article>
           </section>
           <section class="sm:grid grid-cols-3 mt-1 p-5 border-2 gap-8 justify-center items-center">
@@ -23,12 +25,12 @@
             </article>
             <article>
               <label for="campana" class="form-label">Campaña:</label>
-              <select :class="[inputs,'p-3']" id="seleccion" v-model="formData.campana" 
-                @click="mostrarCamps">
-                <option class="mt-1 bg-gray-100" :value="cam.nombre_camp" v-for="cam in lista_operaciones" :key="cam.id">
+              <select :class="[inputs, 'p-3']" id="seleccion" v-model="formData.campana" @click="mostrarCamps">
+                <option class="mt-1 bg-gray-100" :value="cam.nombre_camp" v-for="cam in lista_operaciones"
+                  :key="cam.id">
                   {{ cam.nombre_camp.toUpperCase() }}</option>
 
-                </select>
+              </select>
             </article>
             <article>
               <label for="correoPersonal" class="form-label">Correo usuario:</label>
@@ -48,7 +50,7 @@
 
           <div class="col-md-6 mb-3">
             <label for="dispositivo" class="form-label">Tipo de dispositivo:</label>
-            <select id="dispositivo" :class="[inputs,'p-3']" v-model="formData.dispositivo">
+            <select id="dispositivo" :class="[inputs, 'p-3']" v-model="formData.dispositivo">
               <option class="mt-1 bg-gray-100" value="">Seleccione</option>
               <option class="mt-1 bg-gray-100" value="Portatil">Portátil</option>
               <option class="mt-1 bg-gray-100" value="Escritorio">Escritorio</option>
@@ -93,14 +95,14 @@
           <section class="grid grid-cols-3 p-2 mt-5 border-2 gap-8 ">
             <h3 class="text-white col-span-3 bg-fuchsia-950 p-2 text-2xl">Detalles del monitor</h3>
             <div class="mb-1">
-            <label for="marcaMonitor" class="form-label">Marca del Monitor:</label>
-            <input type="text" id="marcaMonitor" :class="inputs" v-model="formData.marcaMonitor">
-          </div>
-  
-          <div class="mb-1">
-            <label for="modeloMonitor" class="form-label">Modelo del Monitor:</label>
-            <input type="text" id="modeloMonitor" :class="inputs" v-model="formData.modeloMonitor">
-          </div>
+              <label for="marcaMonitor" class="form-label">Marca del Monitor:</label>
+              <input type="text" id="marcaMonitor" :class="inputs" v-model="formData.marcaMonitor">
+            </div>
+
+            <div class="mb-1">
+              <label for="modeloMonitor" class="form-label">Modelo del Monitor:</label>
+              <input type="text" id="modeloMonitor" :class="inputs" v-model="formData.modeloMonitor">
+            </div>
             <div class="col-md-4 mb-3">
               <label for="serialMonitor" class="form-label">Serial del Monitor:</label>
               <input type="text" id="serialMonitor" :class="inputs" v-model="formData.serialMonitor">
@@ -208,7 +210,7 @@
             <label for="marcaMonitor2" class="form-label">Marca del Monitor:</label>
             <input type="text" id="marcaMonitor2" :class="inputs" v-model="formData.marcaMonitor2">
           </div>
-  
+
           <div class="mb-1">
             <label for="modeloMonitor2" class="form-label">Modelo del Monitor:</label>
             <input type="text" id="modeloMonitor2" :class="inputs" v-model="formData.modeloMonitor2">
@@ -224,7 +226,8 @@
         </div>
       </div>
 
-      <p>El presente documento confirma la recepción de equipos tecnológicos asignados al <b>TRABAJADOR</b>, los cuales están
+      <p>El presente documento confirma la recepción de equipos tecnológicos asignados al <b>TRABAJADOR</b>, los cuales
+        están
         sujetos a validaciones técnicas dentro de un plazo de dos (2) días hábiles. Si no se emite un reporte en este
         periodo, se considerará que los equipos han sido recibidos a satisfacción. En caso de daños ocasionados por mala
         manipulación, se aplicarán descuentos según la valorización del equipo.
@@ -235,12 +238,13 @@
         salarios, prestaciones sociales, vacaciones, intereses de cesantía, pagos de naturaleza extralegal, eventuales
         indemnizaciones y cualquier otra acreencia a la que pueda tener derecho durante la vigencia del contrato de
         trabajo o al momento de la terminación del mismo por cualquier motivo.
-        <article for="condiciones" class="p-2 mt-5 flex">
-          <input class="bg-purple-500 w-4" type="checkbox" name="condiciones" id="" :value="true" v-model="condiciones"><label for="condiciones">Si, acepto las condiciones</label>
-        </article>
+      <article for="condiciones" class="p-2 mt-5 flex">
+        <input class="bg-purple-500 w-4" type="checkbox" name="condiciones" id="" :value="true"
+          v-model="condiciones"><label for="condiciones">Si, acepto las condiciones</label>
+      </article>
       </p>
 
-      
+
 
       <div class="mb-3">
         <label for="observaciones" class="form-label">Observaciones:</label>
@@ -261,13 +265,13 @@
       <button type="submit" :class="[botones]" @click="submitForm" :disabled="!condiciones" :enabled="condiciones">
         <i :class="[cargar]"></i> Generar PDF
       </button>
-      <button type="Email" :class="[botones]" @click="EnviarCorreo">
-        <i class="fa-solid fa-envelope me-2"></i>Enviar Por Correo
+      <button type="Email" :class="[botones]" @click="sendInventory">
+        <i :class="carga_envio"></i> Enviar Por Correo
       </button>
       <button type="reset" :class="[botones]" @click="limpiarTodo">
         <i class="fas fa-eraser me-2"></i>Limpiar
       </button>
-      
+
     </div>
     <a href="#" download="" id="down"></a>
   </div>
@@ -302,8 +306,8 @@ export default {
         serialDispositivo: '',
         activoDispositivo: '',
         estadoDispositivo: '',
-        marcaDispositivo:'',
-        modeloDispositivo:'',
+        marcaDispositivo: '',
+        modeloDispositivo: '',
         diadema: 'No',
         marcaDiadema: '',
         serialDiadema: '',
@@ -318,12 +322,12 @@ export default {
         estadoCpu: '',
         serialMonitor: '',
         activoMonitor: '',
-        marcaMonitor:'',
-        modeloMonitor:'',
+        marcaMonitor: '',
+        modeloMonitor: '',
         estadoMonitor: '',
         segundoMonitor: 'No',
-        marcaMonitor2:'',
-        modeloMonitor2:'',
+        marcaMonitor2: '',
+        modeloMonitor2: '',
         serialMonitor2: '',
         activoMonitor2: '',
         tieneDiadema: 'No',
@@ -334,37 +338,42 @@ export default {
         firma2: null,
       },
       // Valor para aceptar terminos y condiciones y habilitar el boton de generar
-      condiciones:false,
+      condiciones: false,
       // Mostrar spinner para demostrar que carga el elemento
-      cargar:'fas fa-file-pdf me-2',
+      cargar: 'fas fa-file-pdf me-2',
 
 
     };
   },
   methods: {
-    EnviarCorreo() {
-      axios.post('/enviar-correo')
-        .then(response => {
-          console.log(response.data.message); // Mensaje de éxito
-        })
-        .catch(error => {
-          console.error('Error al enviar el correo', error); // Error si falla
-        });
+    ...mapMutations(["getSession", 'mostrarCamps', 'cerrarSesionAuto', 'saveForm', 'loadForm', 'sendEmails']),
+    // Envio correo de inventario
+    sendInventory() {
+      this.carga_envio = 'fa-solid fa-spinner fa-spin';
+      if (!this.isFormValid) {
+        this.showNotification('warning', 'Por favor, complete todos los campos requeridos.');
+      } else {
+
+        this.formData.firma1 = this.$refs.signaturePad.getSignatureDataUrl();
+        this.formData.firma2 = this.$refs.signaturePad2.getSignatureDataUrl();
+
+        this.sendEmails(this.formData);
+      }
+      this.carga_envio = 'fa-sharp fa-solid fa-envelope fa-bounce';
+
     },
-    ...mapMutations(["getSession", 'mostrarCamps','cerrarSesionAuto','saveForm','loadForm']),
     // Cargar formulario si hay algo
-    cargarRetorno(){
+    cargarRetorno() {
       this.loadForm(this.usuario_session[0].cedula);
       this.formData = this.datos_form;
     },
 
     // Recoger datos y guardar datos
-    guardarRetorno(){
+    guardarRetorno() {
       let cedula = this.usuario_session[0].cedula;
-      this.saveForm({documento:cedula,form:this.formData});
+      this.saveForm({ documento: cedula, form: this.formData });
     },
     async submitForm() {
-      console.log(this.isFormValid);
       if (this.isFormValid) {
         this.generarPDFRetorno();
       } else {
@@ -385,8 +394,8 @@ export default {
         serialDispositivo: '',
         activoDispositivo: '',
         estadoDispositivo: '',
-        marcaDispositivo:'',
-        modeloDispositivo:'',
+        marcaDispositivo: '',
+        modeloDispositivo: '',
         diadema: 'No',
         marcaDiadema: '',
         serialDiadema: '',
@@ -399,8 +408,8 @@ export default {
         teclado: 'No',
         estadoTeclado: '',
         camara: 'No',
-        marcaMonitor:'',
-        modeloMonitor:'',
+        marcaMonitor: '',
+        modeloMonitor: '',
         serialMonitor: '',
         activoMonitor: '',
         estadoMonitor: '',
@@ -414,37 +423,37 @@ export default {
     },
     generarPDFRetorno: async function () {
       this.cargar = 'fa-solid fa-spinner fa-spin';
-      
+
       // Asignar firmas a laravel
       this.formData.firma1 = this.$refs.signaturePad.getSignatureDataUrl();
       this.formData.firma2 = this.$refs.signaturePad2.getSignatureDataUrl();
-      
-      
+
+
       this.showNotification('info', 'Generando PDF...');
-      
+
       await axios.post('/PDF_RTN', this.formData, {
         responseType: 'blob'
       })
-      .then((res) => {
-        if (res.status == 200) {
+        .then((res) => {
+          if (res.status == 200) {
             var enlace = document.getElementById('down');
             enlace.download = (new Date().getDate().toLocaleString() + '_' + (new Date().getMonth() + 1).toString() + '_' + (new Date().getFullYear()).toString() + '_' + new Date().getTime().toString()) + '_GESTOR_RETORNO_A ' + (this.formData.nombres.toUpperCase()) + '--' + (this.formData.NombreRecibe.toUpperCase()) + '.pdf';
             enlace.href = URL.createObjectURL(res.data);
             enlace.click();
             URL.revokeObjectURL(enlace.href);
           } else {
-            // this.notificacion(2);
+            this.notificacion(2);
           }
         }).catch((err) => {
           console.log(err);
         })
-        
-        this.showNotification('success', 'PDF generado con éxito');
-        this.cargar = 'fas fa-file-pdf me-2';
-        
-        
-      },
-      showNotification(icon, text) {
+
+      this.showNotification('success', 'PDF generado con éxito');
+      this.cargar = 'fas fa-file-pdf me-2';
+
+
+    },
+    showNotification(icon, text) {
       Swal.fire({
         icon,
         text,
@@ -474,7 +483,7 @@ export default {
 
 
     },
-    ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label','datos_form'])
+    ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form', 'carga_envio'])
 
   },
 };

@@ -355,6 +355,9 @@
         <button type="submit" :class="[botones]" @click="submitForm" :disabled="!condiciones">
           <i :class="[cargar]"></i> Generar PDF
         </button>
+        <button type="Email" :class="[botones]" @click="sendInventory">
+          <i :class="carga_envio"></i> Enviar Por Correo
+        </button>
         <button type="reset" :class="[botones]" @click="limpiarTodo">
           <i class="fas fa-eraser me-2"></i>Limpiar
         </button>
@@ -448,7 +451,22 @@
   
     methods: {
 
-        ...mapMutations(["getSession", 'mostrarCamps','cerrarSesionAuto','saveForm','loadForm']),
+        ...mapMutations(["getSession", 'mostrarCamps','cerrarSesionAuto','saveForm','loadForm','sendEmails']),
+    // Envio correo de inventario
+    sendInventory() {
+      this.carga_envio = 'fa-solid fa-spinner fa-spin';
+      if (!this.isFormValid) {
+        // this.showNotification('warning', 'Por favor, complete todos los campos requeridos.');
+      } else {
+
+        this.formData.firma1 = this.$refs.signaturePad.getSignatureDataUrl();
+        this.formData.firma2 = this.$refs.signaturePad2.getSignatureDataUrl();
+
+        this.sendEmails(this.formData);
+      }
+      this.carga_envio = 'fa-sharp fa-solid fa-envelope fa-bounce';
+
+    },
     // Cargar formulario si hay algo
     cargarEntrega(){
       this.loadForm(this.usuario_session[0].cedula);
@@ -578,7 +596,7 @@
           this.formData.campana
         );
       },
-      ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form'])
+      ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form','carga_envio'])
     },
   };
   </script>

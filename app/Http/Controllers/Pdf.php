@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class Pdf extends Controller
 {
@@ -78,13 +79,17 @@ class Pdf extends Controller
             $usuario = GestoreActas::where('cedula',$request->input('cedula'))->first();
             // Validar si el usuario ya asigno contraseña
             if($usuario->password == ''){
-                $usuario->password = md5($request->input('password')); // Encryptar la clave
+                $usuario->password = Hash::make($request->input('password')); // Encryptar la clave
                 $usuario->save();
                 return 1;
                 // Si se asigno clave posteriormente inicia ya la cuenta
-            }else if($usuario->password != '' && $usuario->usuario_activo){
+            }else if($usuario->password != ''){
+                // Validar si el usuario esta activo en el sistema
+                if(!$usuario->usuario_activo){
+                    return 5;
+                }
                 // Validar si la clave ingresada coincide con la de la BD
-                if($usuario->password == md5($request->input('password'))){
+                if(Hash::check($request->input('password'),$usuario->password)){
                     $request->session()->put('gestor_session',$usuario);
                     return 2;
                 }

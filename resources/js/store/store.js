@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 
 const store = new Vuex.Store({
     state:{
+        // Variable para la carga de el correo al momento de procesar el envio.
+        carga_envio:'fa-sharp fa-solid fa-envelope fa-bounce',
         componentes_vuex:[],
         lista_gestores:[],
         usuario_session:[],

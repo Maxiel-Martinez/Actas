@@ -119,4 +119,12 @@ class GestoresActas extends Controller
         return response()->json(true);
     }
 
+    // Agregar usuarios que se les permitira la copia.
+    public function AddGestorSendMail($id){
+        $gestor = GestoreActas::find($id);
+        $gestor->copia_correo = true;
+        $gestor->save();
+        return response()->json(true);
+    }
+
 }

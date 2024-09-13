@@ -230,7 +230,7 @@
         <!-- Llamar a la funcion para generar el pdf -->
         <button :class="botones" @click="generarPDF"><span :class="[cargar]"></span> Generar
           PDF</button>
-          <button @click="sendInventory" :class="botones"><i class="fa-sharp fa-solid fa-envelope fa-bounce"></i>  Envio acta por correo</button>
+          <button @click="sendInventory" :class="botones"><i :class="carga_envio"></i>  Envio acta por correo</button>
         <button :class="botones" @click="limpiarTodo"><span class="fa-solid fa-eraser" />
           Limpiar formulario</button>
       </div>
@@ -311,6 +311,7 @@ export default {
     ...mapMutations(['mostrarComponentes', 'mostrarGestores', 'getSession', 'mostrarCamps', 'cerrarSesionAuto', 'validateActas', 'getNameGestor','saveForm','loadForm','sendEmails']),
     // Envio correo de inventario
     sendInventory(){
+      this.carga_envio = 'fa-solid fa-spinner fa-spin';
       if (this.validarInformacion()) {
         this.notificacion(4);
       } else {
@@ -323,6 +324,8 @@ export default {
         this.form_data.firma3 = firma3;
         this.sendEmails(this.form_data);
       }
+      this.carga_envio = 'fa-sharp fa-solid fa-envelope fa-bounce';
+      
     },
     // Guardar formulario de la operacion
     guardarOperacion(){
@@ -535,7 +538,7 @@ export default {
   },
   computed: {
     ...mapState(['componentes_vuex', 'lista_gestores', 'usuario_session', 'lista_operaciones', 'datos_form', 'inputs', 'botones', 'color_label', 'tabla',
-      'name_gestor_session'
+      'name_gestor_session', 'carga_envio'
     ])
   },
 

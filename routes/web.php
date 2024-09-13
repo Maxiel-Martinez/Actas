@@ -44,6 +44,7 @@ Route::controller(GestoresActas::class)->group(function(){
     // Copias de acta a usuarios permitidos por el administrador
     Route::get('/Actas_de_responsabilidad/Gestores/SendCC','GestorSendMail')->name('enviarcopia_correo');
     Route::post('/Actas_de_responsabilidad/Gestores/SendCC/Delete/{id}','DeleteGestorSendMail')->name('delete_enviarcopia_correo');
+    Route::post('/Actas_de_responsabilidad/Gestores/SendCC/Add/{id}','AddGestorSendMail')->name('add_enviarcopia_correo');
 });
 
 Route::controller(Historiales_actas::class)->group(function(){

@@ -6,6 +6,7 @@ use App\Mail\SendMails;
 use App\Models\GestoreActas;
 use App\Models\Historial_pdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -35,20 +36,28 @@ class EnvioCorreoController extends Controller
             $correos_send[] = $gestor_copia->correo;
         }
 
+
         try {
             $pdf = new Pdf();
-            // Crear el pdf al guardarlo en la base de datos
-            $pdf->pdfOperacion($request);
-            $ruta = Historial_pdf::where('numero_caso',$request->n_caso)->get();
+            // Crear el pdf al guardarlo en la base de datos, antes validar que pdf se va a generar
+            error_log($request->tipo_formulario);
+            if($request->tipo_formulario == "retornos"){
+                $pdf->pdfRetorno($request);
+            }else if($request->tipo_formulario == "operacion"){
+                $pdf->pdfOperacion($request);
+            }else if($request->tipo_formulario == "entrega"){
+                $pdf->pdfEntrega($request);
+            }
+            $ruta = Historial_pdf::where('numero_caso',$request->n_caso ?? $request->numeroCaso)->get();
 
             //code...
             $data = [
-                'nombre_encargado'=>$request->nombre_encargado,
+                'nombre_encargado'=>$request->nombre_encargado ?? $request->nombres,
                 'tipo_acta'=>$request->tipo_formulario,
-                'nombre_gestor'=>$request->nombre_gestor,
-                'cargo_operacion'=>$request->cargo_operacion,
-                'op_solicitante'=>$request->op_solicitante,         
-                'n_caso'=>$request->n_caso,         
+                'nombre_gestor'=>$request->nombre_gestor ?? strtoupper($request->NombreRecibe),
+                'cargo_operacion'=>$request->cargo_operacion ?? 'N/A',
+                'op_solicitante'=>$request->op_solicitante ?? strtoupper($request->campana),         
+                'n_caso'=>$request->n_caso ?? $request->numeroCaso,         
                 'ruta_pdf'=>$ruta[0]->ruta_pdf,
             ];
 
