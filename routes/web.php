@@ -53,10 +53,14 @@ Route::controller(Historiales_actas::class)->group(function(){
     Route::post('/Actas_de_responsabilidad/Historial/{id}','AccederDatos')->name('historial_actas');
     Route::post('/Actas_de_responsabilidad/Historial/DownloadPDF/{id}','DownloadAgainPDF')->name('download_actas');
     Route::post('/Actas_de_responsabilidad/Historial/BuscarCaso/{id}','BuscarHistorialBasic')->name('buscar_actas');
+    // Buscar actas pero solo del gestor que ha iniciado sesion.
+    Route::post('/Actas_de_responsabilidad/Historial/FindMyCase/{id}','BuscarHistorialBasicMyDocs')->name('buscar_Myactas');
     Route::post('/Actas_de_responsabilidad/Historial/BuscarCasoAvanzado/{f_inicio}/{f_fin}/{id_gestor}','BuscarHistorialHard')->name('buscar_actas');
     Route::get('/Actas_de_responsabilidad/Historial/MyDocuments','historialMyActas')->name('myActas');
     Route::post('/Actas_de_responsabilidad/Historial/MyDocuments/Show','showMyDocuments')->name('showMyActas');
     Route::get('/Actas_de_responsabilidad/Campanas/Filtro/{fk_cam}','BuscarHistorialCamp')->name('historial_cam');
+    // Validar que no exista el mismo caso para alertar al gestor
+    Route::post('/Actas_de_responsabilidad/Historial/ValidateCaseInterface/{id}','validateCaseExists')->name('validate_case');
 });
 
 // Acciones con las campañas

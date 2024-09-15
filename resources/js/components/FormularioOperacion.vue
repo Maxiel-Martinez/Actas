@@ -35,8 +35,11 @@
         compañía, generando la deducción de la sumas que se le adeuden por salarios, prestaciones sociales, vacaciones,
         intereses de cesantía, pagos de naturaleza extralegal, eventuales indemnizaciones y cualquier otra acreencia a
         que pueda tener derecho en vigencia del contrato de trabajo o al momento de terminación del contrato de trabajo
-        por cualquier motivo. <input type="text" placeholder="Ingrese el caso" v-model="form_data.n_caso"
-          :class="inputs"></p>
+        por cualquier motivo. <input type="text" placeholder="Ingrese el caso" @change="validateCaseUI(form_data.n_caso)" v-model="form_data.n_caso"
+          :class="inputs">
+          <!-- Mostrar alerta de caso existente en la base de datos -->
+        <p v-if="message!=null" class="text-red-900"><strong>{{message}}</strong></p>
+        </p>
       <ul class="grid grid-cols-2 justify-center align-around">
         <p :class="['col-span-2 text-2xl bg-fuchsia-950 p-2 text-white']">Definiciones</p>
         <li :class="color_label">Motivo de Solicitud <input type="text"
@@ -308,7 +311,7 @@ export default {
 
   },
   methods: {
-    ...mapMutations(['mostrarComponentes', 'mostrarGestores', 'getSession', 'mostrarCamps', 'cerrarSesionAuto', 'validateActas', 'getNameGestor','saveForm','loadForm','sendEmails']),
+    ...mapMutations(['mostrarComponentes', 'mostrarGestores', 'getSession', 'mostrarCamps', 'cerrarSesionAuto', 'validateActas', 'getNameGestor','saveForm','loadForm','sendEmails','validateCaseUI']),
     // Envio correo de inventario
     sendInventory(){
       this.carga_envio = 'fa-solid fa-spinner fa-spin';
@@ -337,6 +340,8 @@ export default {
     cargarOperacion(){
       this.loadForm(this.usuario_session[0].cedula);
       this.form_data = this.datos_form;
+      // Devolver el tipo de acta que es si se carga el archivo.
+      this.form_data.tipo_formulario = 'operacion'
     },
     generarPDF: async function () {
       this.cargar = 'fa-solid fa-spinner fa-spin';
@@ -537,7 +542,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['componentes_vuex', 'lista_gestores', 'usuario_session', 'lista_operaciones', 'datos_form', 'inputs', 'botones', 'color_label', 'tabla',
+    ...mapState(['componentes_vuex', 'lista_gestores', 'usuario_session', 'lista_operaciones', 'datos_form', 'inputs', 'botones', 'color_label', 'tabla', 'message',
       'name_gestor_session', 'carga_envio'
     ])
   },

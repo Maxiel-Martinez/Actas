@@ -19,6 +19,8 @@ const store = new Vuex.Store({
         botones:'bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 m-2',
         color_label:'text-slate-900 p-1 mt-2',
         tabla:'outline-none border-none text-center p-3',
+        // Mensaje de alerta para indicar un caso existente
+        message:null
     },
     mutations:{
         // Mostrar componentes de manera global
@@ -227,6 +229,23 @@ const store = new Vuex.Store({
                 });
 
         },
+
+        // Validar caso para alertar al gestor que llena el formulario.
+        validateCaseUI(state, idCase){
+            axios.post(`/Actas_de_responsabilidad/Historial/ValidateCaseInterface/${idCase}`)
+            .then(res=>{
+                if(res.data){
+                    // Cambiar el estado de los inputs para notificar errores.
+                    state.inputs = 'outline-none ring-0 focus:ring-red-500 transition duration-300 focus:ring-2 bg-opacity-80 text-red-500 m-1 p-1';
+                    state.message = '¡Este caso ya esta registrado!';
+                }else{
+                    // Cambiar el estado de los inputs para quitar la alerta en todo el formulario.
+                    state.inputs = 'outline-none ring-0 focus:ring-purple-500 transition duration-300 focus:ring-2 bg-opacity-80 text-slate-500 m-1 p-1';
+                    state.message = null;
+                }
+            })
+            .catch(err=>console.log(err));
+        }
         
     }
 });

@@ -31,7 +31,7 @@ class SendMails extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Send Mails',
+            subject: 'Acta soporte y tecnologia (TIMAC)',
         );
     }
 

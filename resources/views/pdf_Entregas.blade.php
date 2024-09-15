@@ -174,6 +174,7 @@
                 <div class="container">
                     <p class="firmas_p">Firma de quien entrega: <img src="data:image/png;base64,{{$ruta1}}" alt="" width="100px" height="40px"></p>
                     <p class="firmas_p">Nombre: <b>{{$nombreRecibe}}</b></p>
+                    <p><strong>Gestor en soluciones y soporte tecnologico</strong></p>
                 </div>
             </td>
             <td>

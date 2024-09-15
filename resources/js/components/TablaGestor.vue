@@ -66,7 +66,7 @@ export default {
         },
         // Metodo para buscar un id de caso y mostrarlo
         buscarCasos: async function () {
-            await axios.post(`/Actas_de_responsabilidad/Historial/BuscarCaso/${this.buscarCaso}`)
+            await axios.post(`/Actas_de_responsabilidad/Historial/FindMyCase/${this.buscarCaso}`)
                 .then(res => {
                     this.lista_actas = res.data;
                 })

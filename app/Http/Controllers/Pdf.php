@@ -312,8 +312,8 @@ class Pdf extends Controller
         $serialDispositivo = $request->serialDispositivo;
         $activoDispositivo = $request->activoDispositivo;
         $estadoDispositivo = $request->estadoDispositivo;
-        $serialEquipoAnterior = $request->serialEquipoAnterior;
-        $activoEquipoAnterior = $request->activoEquipoAnterior;
+        $serialEquipoAnterior = $request->serialDispositivoAnterior;
+        $activoEquipoAnterior = $request->activoDispositivoAnterior;
         $diadema = $request->diadema;
         $marcaDiadema = $request->marcaDiadema;
         $serialDiadema = $request->serialDiadema;
@@ -368,7 +368,7 @@ class Pdf extends Controller
             $pdf->render();
 
             // Guardar el pdf en el servidor y base de datos.
-            $this->SavePDFServerDB($nombres.'_A_'.$nombreRecibe,$pdf,Carbon::now()->toDateString(),$request,2,$numeroCaso,$campana);
+            $this->SavePDFServerDB($nombreRecibe.'_A_'.$nombres,$pdf,Carbon::now()->toDateString(),$request,2,$numeroCaso,$campana);
 
         }catch(Exception $e){
             error_log($e->getMessage());

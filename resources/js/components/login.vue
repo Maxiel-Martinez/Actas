@@ -74,7 +74,7 @@ export default {
             this.contador = 0;
             break;
           case 5:
-            Swal.fire({title:'¡Ups!',text:'¡Este usuario esta bloqueado, contacte al administrador!',icon:'info',toast:true,position: "top-end",timer:2000, showConfirmButton:false});
+            Swal.fire({title:'¡Ups!',text:'¡Este usuario esta bloqueado o inhabilitado, contacte al administrador!',icon:'info',toast:true,position: "top-end",timer:2000, showConfirmButton:false});
             break;
           case 4:
             this.contador += 1;

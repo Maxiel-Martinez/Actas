@@ -20,7 +20,9 @@
               </div>
               <article>
                 <label for="numeroCaso" class="form-label">N° Caso:</label>
-                <input type="text" id="numeroCaso" :class="inputs" v-model="formData.numeroCaso" @click="cargarUsuarioSession">
+                <input type="text" id="numeroCaso" :class="inputs" v-model="formData.numeroCaso" @click="cargarUsuarioSession" @change="validateCaseUI(formData.numeroCaso)">
+                 <!-- Mostrar alerta de caso existente en la base de datos -->
+                  <p v-if="message!=null" class="text-red-900"><strong>{{message}}</strong></p>
               </article>
               <div class="col-md-4">
                 <label for="concepto" class="form-label">Por concepto de:</label>
@@ -451,7 +453,7 @@
   
     methods: {
 
-        ...mapMutations(["getSession", 'mostrarCamps','cerrarSesionAuto','saveForm','loadForm','sendEmails']),
+        ...mapMutations(["getSession", 'mostrarCamps','cerrarSesionAuto','saveForm','loadForm','sendEmails','validateCaseUI']),
     // Envio correo de inventario
     sendInventory() {
       this.carga_envio = 'fa-solid fa-spinner fa-spin';
@@ -471,6 +473,7 @@
     cargarEntrega(){
       this.loadForm(this.usuario_session[0].cedula);
       this.formData = this.datos_form;
+      this.formData.tipo_formulario = 'entrega';
     },
 
     // Recoger datos y guardar datos
@@ -596,7 +599,7 @@
           this.formData.campana
         );
       },
-      ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form','carga_envio'])
+      ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form','carga_envio','message'])
     },
   };
   </script>

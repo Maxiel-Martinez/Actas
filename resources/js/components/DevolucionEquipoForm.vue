@@ -17,7 +17,8 @@
             <article>
               <label for="numeroCaso" class="form-label">N° Caso:</label>
               <input type="text" id="numeroCaso" :class="inputs" v-model="formData.numeroCaso"
-                @click="cargarUsuarioSession">
+                @click="cargarUsuarioSession" @change="validateCaseUI(formData.numeroCaso)">
+                <p v-if="message!=null" class="text-red-900"><strong>{{message}}</strong></p>
             </article>
             <article>
               <label for="nombres" class="form-label">Nombre:</label>
@@ -346,7 +347,7 @@ export default {
     };
   },
   methods: {
-    ...mapMutations(["getSession", 'mostrarCamps', 'cerrarSesionAuto', 'saveForm', 'loadForm', 'sendEmails']),
+    ...mapMutations(["getSession", 'mostrarCamps', 'cerrarSesionAuto', 'saveForm', 'loadForm', 'sendEmails','validateCaseUI']),
     // Envio correo de inventario
     sendInventory() {
       this.carga_envio = 'fa-solid fa-spinner fa-spin';
@@ -366,6 +367,8 @@ export default {
     cargarRetorno() {
       this.loadForm(this.usuario_session[0].cedula);
       this.formData = this.datos_form;
+      this.formData.tipo_formulario = 'retornos';
+
     },
 
     // Recoger datos y guardar datos
@@ -483,7 +486,7 @@ export default {
 
 
     },
-    ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form', 'carga_envio'])
+    ...mapState(["usuario_session", 'lista_operaciones', 'inputs', 'botones', 'color_label', 'datos_form', 'carga_envio', 'message'])
 
   },
 };
