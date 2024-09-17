@@ -35,7 +35,7 @@
         compañía, generando la deducción de la sumas que se le adeuden por salarios, prestaciones sociales, vacaciones,
         intereses de cesantía, pagos de naturaleza extralegal, eventuales indemnizaciones y cualquier otra acreencia a
         que pueda tener derecho en vigencia del contrato de trabajo o al momento de terminación del contrato de trabajo
-        por cualquier motivo. <input type="text" placeholder="Ingrese el caso" @change="validateCaseUI(form_data.n_caso)" v-model="form_data.n_caso"
+        por cualquier motivo. <input type="text" placeholder="Ingrese el caso" @input="validateCaseUI(form_data.n_caso)" v-model="form_data.n_caso"
           :class="inputs">
           <!-- Mostrar alerta de caso existente en la base de datos -->
         <p v-if="message!=null" class="text-red-900"><strong>{{message}}</strong></p>
@@ -102,7 +102,7 @@
           </tr>
         </table>
         <!-- vista de agregados de equipos recogidos -->
-        <div class="p-1" v-if="form_data.data_recogido.length !== 0">
+        <div class="p-1" v-if="form_data.data_recogido !== 0">
           <table :class="['cabeceras_tabla']">
             <thead>
               <tr>
@@ -161,7 +161,7 @@
         </table>
 
         <!-- Vista de elementos entregados -->
-        <div class="p-1" v-if="form_data.data_entregado.length !== 0">
+        <div class="p-1" v-if="form_data.data_entregado !== 0">
 
           <table :class="['cabeceras_tabla']">
             <thead>

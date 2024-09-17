@@ -17,7 +17,7 @@
             <article>
               <label for="numeroCaso" class="form-label">N° Caso:</label>
               <input type="text" id="numeroCaso" :class="inputs" v-model="formData.numeroCaso"
-                @click="cargarUsuarioSession" @change="validateCaseUI(formData.numeroCaso)">
+                @click="cargarUsuarioSession" @input="validateCaseUI(formData.numeroCaso)">
                 <p v-if="message!=null" class="text-red-900"><strong>{{message}}</strong></p>
             </article>
             <article>
